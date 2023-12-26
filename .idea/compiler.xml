@@ -9,5 +9,8 @@
         <module name="HibernatePracticed" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="HibernatePractice" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -10,40 +10,53 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.util.ArrayList;
 
+// ... (imports remain unchanged)
+
 public class StoreData {
 
     public static void main(String[] args) {
-        /*Once the application is started the sessionfactory will be created file  from hibernate.cfg.xml;
-        * */
-        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml")
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                .configure("hibernate.cfg.xml")
                 .build();
-        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-        System.out.println(meta.getDatabase().toString());
+        Metadata meta = new MetadataSources(ssr)
+                .getMetadataBuilder()
+                .build();
+
         SessionFactory factory = meta.getSessionFactoryBuilder().build();
         Session session = factory.openSession();
-        Transaction t=null;
-       try{
+        Transaction t = null;
+
+        try {
             t = session.beginTransaction();
+
             Employee e1 = new Employee();
-            e1.setId(2);
-            e1.setFirstName("Nihal");
-            e1.setLastName("Basha");
-            session.update(e1);
-            Thread.sleep(10000);
-            //int i=10/0;
-            Employee empl = session.get(Employee.class, 1);
-            System.out.println(empl.getFirstName());
+            e1.setName("Zubair Basha");
+
+            Regular_Employee e2 = new Regular_Employee();
+            e2.setName("Ashik");
+            e2.setSalary(50000);
+            e2.setBonus(5);
+
+            Contract_Employee e3 = new Contract_Employee();
+            e3.setName("Nihal Ahmed");
+            e3.setContract_duration("5 Months");
+            e3.setPay_per_hour(500);
+
+       /*     session.persist(e1);
+            session.persist(e2);
+            session.persist(e3);*/
+            session.get(1);
             t.commit();
             System.out.println("Saved Successfully");
-
-        }catch(Exception e){
-            if(t!=null){
+        } catch (Exception e) {
+            if (t != null) {
                 t.rollback();
-               System.out.println("Roll backed");
+                System.out.println("Rollback");
+                e.printStackTrace();
             }
-        }finally{
-           factory.close();
-           session.close();
+        } finally {
+            session.close();
+            factory.close();
         }
     }
 }

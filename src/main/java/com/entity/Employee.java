@@ -1,40 +1,33 @@
 package com.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.processing.Generated;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee101")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "employee")
 public class Employee {
 
 
-
-       @Id
-       private int id;
-        private String firstName, lastName;
-        public int getId() {
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String name;
+    public int getId() {
         return id;
     }
 
-        public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
-
-        public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-        public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-        public String getLastName() {
-        return lastName;
-    }
-
-        public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
