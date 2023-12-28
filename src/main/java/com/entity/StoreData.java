@@ -8,9 +8,10 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.List;
 
-// ... (imports remain unchanged)
 
 public class StoreData {
 
@@ -28,26 +29,27 @@ public class StoreData {
 
         try {
             t = session.beginTransaction();
-
-            Employee e1 = new Employee();
-            e1.setName("Zubair Basha");
-
-            Regular_Employee e2 = new Regular_Employee();
-            e2.setName("Ashik");
-            e2.setSalary(50000);
-            e2.setBonus(5);
-
-            Contract_Employee e3 = new Contract_Employee();
-            e3.setName("Nihal Ahmed");
-            e3.setContract_duration("5 Months");
-            e3.setPay_per_hour(500);
-
-       /*     session.persist(e1);
-            session.persist(e2);
-            session.persist(e3);*/
-            session.get(1);
-            t.commit();
-            System.out.println("Saved Successfully");
+            ArrayList<String> list1=new ArrayList<String>();
+            list1.add("Java is a programming language");
+            list1.add("Java is a platform");
+            ArrayList<String> list2 = new ArrayList<String>();
+            list2.add("Servlet is an Interface");
+            list2.add("Servlet is an API");
+            Question q1=new Question();
+             q1.setQname("What is Java?");
+             q1.setAnswers(list1);
+             Question q2=new Question();
+             q2.setQname("What is Servlet?");
+             q2.setAnswers(list2);
+             TypedQuery query= session.createQuery("from Question");
+             System.out.println(query.getResultList());
+             List<Question> list=query.getResultList();
+             list.stream().forEach(question ->System.out.println("Question :"+question.getQname()+" Answer:"+question.getAnswers()));
+         /*    session.persist(q1);
+             session.persist(q2);*/
+           t.commit();
+           /* int i=10/0;
+            Thread.sleep(6000);*/
         } catch (Exception e) {
             if (t != null) {
                 t.rollback();
@@ -57,6 +59,7 @@ public class StoreData {
         } finally {
             session.close();
             factory.close();
+
         }
     }
 }

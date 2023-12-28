@@ -1,10 +1,10 @@
 package com.entity;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue(value = "contract_employee")
+@Table(name = "contract_employee1")
+@PrimaryKeyJoinColumn(name = "id")
 public class Contract_Employee extends  Employee{
 
 

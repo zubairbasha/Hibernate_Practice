@@ -4,16 +4,17 @@ import javax.annotation.processing.Generated;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee101")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type",discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "employee")
+@Table(name = "employee102")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Employee {
 
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
+   @Column(name = "id")
     private int id;
+   @Column(name = "name")
     private String name;
     public int getId() {
         return id;

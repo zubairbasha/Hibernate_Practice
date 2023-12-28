@@ -1,10 +1,10 @@
 package com.entity;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue(value = "regular_employee")
+@Table(name = "regular_employee1")
+@PrimaryKeyJoinColumn(name = "id")
 public class Regular_Employee extends Employee{
 
     private float salary;
