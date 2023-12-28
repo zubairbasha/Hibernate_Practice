@@ -12,10 +12,9 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Admin@1234</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <mapping class="com.entity.Employee"/>
-        <mapping class="com.entity.Contract_Employee"/>
-        <mapping class="com.entity.Regular_Employee"/>
-        <mapping class="com.entity.Question"></mapping>
+        <property name="hibernate.show_sql">true</property>
+
+        <mapping class="com.entity.Post"></mapping>
     </session-factory>
 
 </hibernate-configuration>
