@@ -1,24 +1,27 @@
 package com.one_to_one;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "author")
+@Table(name = "author1")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int birthYear;
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name="book_id")
-    private Book book;
+    private Book book;*/
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+    private List<Book> book;
 
-    public Book getBook() {
+    public List<Book> getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(List<Book> book) {
         this.book = book;
     }
 

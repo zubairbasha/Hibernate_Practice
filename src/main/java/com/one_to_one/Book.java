@@ -2,14 +2,26 @@ package com.one_to_one;
 
 import javax.persistence.*;
 @Entity
-@Table(name = "book")
+@Table(name = "book1")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title,publishedYear;
-    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL)
+ /*   @OneToOne(mappedBy = "book",cascade = CascadeType.ALL)
+    private Author author;*/
+    //Many to one relationship
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="author_id")
     private Author author;
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     public int getId() {
         return id;
@@ -35,11 +47,13 @@ public class Book {
         this.publishedYear = publishedYear;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", publishedYear='" + publishedYear + '\'' +
+                ", author=" + author +
+                '}';
     }
 }

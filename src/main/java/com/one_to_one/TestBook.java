@@ -8,7 +8,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 
@@ -23,29 +23,28 @@ public class TestBook {
             transaction=session.beginTransaction();
             Book book=new Book();
             Author author=new Author();
+            //author.setId(1);
             author.setName("M Zubair Basha");
             author.setBirthYear(1998);
             book.setTitle("Easy way of Learning Programming");
             book.setPublishedYear("2015");
             book.setAuthor(author);
-            author.setBook(book);
-            //session.persist(book);
-            TypedQuery query=session.createQuery("FROM Book");
-            List<Book> books=query.getResultList();
-            books.forEach(
-                    b->
-                            System.out.println("Book: "+b.getTitle()+" Author:"+b.getAuthor().getName())
+            Book book2=new Book();
+            Book book3=new Book();
+            book2.setAuthor(author);
+            book2.setTitle("Python Programming");
+            book2.setPublishedYear("2016");
+            book3.setTitle("Java Programming");
+            book3.setPublishedYear("2020");
+            book3.setAuthor(author);
+            author.setBook(List.of(book,book2,book3));
+           /* session.persist(book);*/
 
+            Book findBooks=session.find(Book.class,1);
+            //Author authorsValue=session.find(Author.class,1);
+            //System.out.println(authorsValue);
+            //System.out.println(findBooks);
 
-            );
-            TypedQuery query2=session.createQuery("FROM Author");
-            List<Author> authors=query2.getResultList();
-            authors.forEach(
-                    a->
-                            System.out.println("Book: "+a.getBook().getTitle()+" Author:"+a.getName())
-
-
-            );
             transaction.commit();
         }
         catch (Exception e){
