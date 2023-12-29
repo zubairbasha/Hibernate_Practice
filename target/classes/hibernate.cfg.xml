@@ -14,8 +14,13 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.show_sql">true</property>
 
-        <mapping class="com.one_to_one.Book"></mapping>
-        <mapping class="com.one_to_one.Author"></mapping>
+        <!-- Enable second-level cache -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+
+        <!-- Specify caching provider (Ehcache) -->
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+
+        <mapping class="com.composition.Employee"></mapping>
 
     </session-factory>
 
