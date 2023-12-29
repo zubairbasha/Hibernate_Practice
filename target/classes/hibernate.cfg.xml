@@ -14,8 +14,8 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.show_sql">true</property>
 
-        <mapping class="com.many_many.Question"></mapping>
-        <mapping class="com.many_many.Answer"></mapping>
+        <mapping class="com.one_to_one.Book"></mapping>
+        <mapping class="com.one_to_one.Author"></mapping>
 
     </session-factory>
 
