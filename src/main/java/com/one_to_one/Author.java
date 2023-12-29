@@ -10,6 +10,17 @@ public class Author {
     private int id;
     private String name;
     private int birthYear;
+    @OneToOne
+    @JoinColumn(name="book_id")
+    private Book book;
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     public int getId() {
         return id;

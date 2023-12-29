@@ -8,7 +8,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title,publishedYear;
-    @OneToOne(targetEntity = Author.class,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL)
     private Author author;
 
     public int getId() {

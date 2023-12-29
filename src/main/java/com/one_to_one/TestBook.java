@@ -11,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+
 public class TestBook {
     public static void main(String[] args) {
         StandardServiceRegistry ssr=new StandardServiceRegistryBuilder().configure().build();
@@ -27,12 +28,21 @@ public class TestBook {
             book.setTitle("Easy way of Learning Programming");
             book.setPublishedYear("2015");
             book.setAuthor(author);
+            author.setBook(book);
             //session.persist(book);
             TypedQuery query=session.createQuery("FROM Book");
             List<Book> books=query.getResultList();
             books.forEach(
                     b->
                             System.out.println("Book: "+b.getTitle()+" Author:"+b.getAuthor().getName())
+
+
+            );
+            TypedQuery query2=session.createQuery("FROM Author");
+            List<Author> authors=query2.getResultList();
+            authors.forEach(
+                    a->
+                            System.out.println("Book: "+a.getBook().getTitle()+" Author:"+a.getName())
 
 
             );
